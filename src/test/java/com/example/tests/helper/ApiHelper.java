@@ -33,11 +33,12 @@ public class ApiHelper {
                 .extract().response();
     }
 
-    public Response putToDo(int id, String text) {
+    public Response putToDo(int id, String text, boolean bool) {
 
         Map<String, Object> body = new HashMap<>();
         body.put("id", id);
         body.put("text", text);
+        body.put("completed", bool);
             return given()
                     .when()
                     .body(body)

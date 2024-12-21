@@ -23,9 +23,9 @@ public class TodoPutTests {
 
     @Test
     void putTodos() { //проверка PUT запроса
-        Todo todo = new Todo(1, "Buy bread");
+        Todo todo = new Todo(11, "Buy bread");
         todo.setCompleted(true);
-        Response response = apiHelper.putToDo(todo.getId(), todo.getText());
+        Response response = apiHelper.putToDo(todo.getId(), todo.getText(), todo.isCompleted());
         response.then().spec(responseSpecOK200());
         System.out.println("PUT успешен, тело ответа, как и ожидалось, пустое");
     }
@@ -33,7 +33,7 @@ public class TodoPutTests {
     @Test
     void putTodosSeparately(){ //проверка put запроса на отсутствие данных
         Todo todo = new Todo();
-        Response response = apiHelper.putToDo(todo.getId(), todo.getText());
+        Response response = apiHelper.putToDo(todo.getId(), todo.getText(), todo.isCompleted());
         response.then().spec(responseSpec400());
         System.out.println("Обновление недоступно ввиду отсутствия данных");
     }
@@ -42,7 +42,7 @@ public class TodoPutTests {
     void putTodosWithoutSomeData(){ //частичное обновление данных
         Todo todo = new Todo();
         todo.setText("Sell cheese");
-        Response response = apiHelper.putToDo(todo.getId(), todo.getText());
+        Response response = apiHelper.putToDo(todo.getId(), todo.getText(), todo.isCompleted());
         response.then().spec(responseSpec400());
         System.out.println("Частичное обновление данных невозможно");
     }
@@ -51,7 +51,7 @@ public class TodoPutTests {
     void putTodosWithNoExistID() { //обновление с несуществующим ID
         Todo todo = new Todo(-1, "Sell bread");
         todo.setCompleted(true);
-        Response response = apiHelper.putToDo(todo.getId(), todo.getText());
+        Response response = apiHelper.putToDo(todo.getId(), todo.getText(), todo.isCompleted());
         response.then().spec(responseSpec400());
         System.out.println("Некорректный ID");
     }
@@ -60,7 +60,7 @@ public class TodoPutTests {
     void putWithRandomData() { //обновление данных рандомным методом
         Todo todo = new Todo(dataGenerator.getRandomUID(), dataGenerator.getRandomText());
         todo.setCompleted(dataGenerator.getRandomBool());
-        Response response = apiHelper.putToDo(todo.getId(), todo.getText());
+        Response response = apiHelper.putToDo(todo.getId(), todo.getText(), todo.isCompleted());
         response.then().spec(responseSpec400());
         System.out.println("PUT запрос с рандомными данными, как и ожидалось, невозможен");
     }
