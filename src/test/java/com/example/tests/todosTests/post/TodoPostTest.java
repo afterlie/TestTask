@@ -42,7 +42,7 @@ public class TodoPostTest {
     @Test
     void postTodosWithEmptyText() { //умение обрабатывать пустое поле
         Todo todo = new Todo();
-        todo.setId(25);
+        todo.setId(1);
         todo.setText("");
         todo.setCompleted(dataGenerator.getRandomBool());
         Response response = apiHelper.postToDo(todo.getId(), todo.getText(), todo.isCompleted());

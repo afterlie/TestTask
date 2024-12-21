@@ -21,8 +21,8 @@ public class TodoDeleteTest {
 
     @Test
     void deleteTodos() { //удаление валидных данных
-        apiHelper.deleteToDo(1);
-        responseSpecOK200();
+        Response response = apiHelper.deleteToDo(1);
+        response.then().spec(responseSpecOK200());
     }
 
     @Test
