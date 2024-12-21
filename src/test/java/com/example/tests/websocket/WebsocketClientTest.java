@@ -17,8 +17,8 @@ public class WebsocketClientTest {
             //жду соединения
             Thread.sleep(500);
 
-            //отправляю запасное сообщение еще одно сообщение, на всякий
-            client.sendMessage("Spare message");
+            //отправляю запасное сообщение, на всякий
+            client.sendMessage("Spare message to approve connection");
 
         } catch (URISyntaxException | InterruptedException e) {
             e.printStackTrace();

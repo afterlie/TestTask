@@ -13,8 +13,8 @@ public class WebSocketClientExample extends WebSocketClient {
 
     @Override
     public void onOpen(ServerHandshake handshakedata) {
-        System.out.println("Connected to the server!");
-        sendMessage("Finally we are connected to the WS, congrats!");
+        System.out.println("Connected to the Java Client!");
+        sendMessage("Finally we are connected to the Java Client, congrats!");
     }
 
     @Override

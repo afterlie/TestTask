@@ -1,18 +1,23 @@
 package com.example.tests.helper;
 
-import constants.*;
-import constants.RestAssuredSetup;
-import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
-import static constants.Constants.TEXT;
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.*;
 
 public class ApiHelper {
-    private static RestAssuredSetup restAssuredSetup = new RestAssuredSetup();
+
+    public Response getToDo(){
+        return given()
+                .when()
+                .get("/todos")
+                .then()
+                .log().all()
+                .body("size()", greaterThan(0))
+                .extract().response();
+    }
 
     public Response postToDo(int id, String text, boolean bool) {
         Map<String, Object> body = new HashMap<>();
@@ -20,27 +25,23 @@ public class ApiHelper {
         body.put("text", text);
         body.put("completed", bool);
         return given()
-                .header("Authorization", Constants.AUTH_TOKEN)
-                .contentType(ContentType.JSON)
                 .when()
                 .body(body)
                 .post("/todos/")
                 .then()
-                .log().ifValidationFails()
+                .log().all()
                 .extract().response();
     }
 
-    public Response putToDo(int id, String text, boolean bool) {
+    public Response putToDo(int id, String text) {
+
         Map<String, Object> body = new HashMap<>();
         body.put("id", id);
-        body.put("text", TEXT);
-        body.put("completed", bool);
+        body.put("text", text);
             return given()
-                    .header("Authorization", Constants.AUTH_TOKEN)
-                    .contentType(ContentType.JSON)
                     .when()
                     .body(body)
-                    .put("/todos/" + 2)
+                    .put("/todos/" + id)
                     .then()
                     .log().all()
                     .extract().response();
@@ -48,12 +49,10 @@ public class ApiHelper {
 
     public Response deleteToDo(int id) {
         return given()
-                .header("Authorization", Constants.AUTH_TOKEN)
                 .when()
                 .delete("/todos/" + id)
                 .then()
-                .log().ifValidationFails()
+                .log().all()
                 .extract().response();
     }
-
 }

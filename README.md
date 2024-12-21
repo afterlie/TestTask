@@ -4,6 +4,7 @@
 Тесты для проверки CRUD операций и авторизации.
 
 ## Запуск тестов
+0. Подключитесь к docker run-p 8080:4242 todo-app:latest
 1. Убедитесь, что API запущен на `localhost:8080`
 2. Пройдите по пути src/test/java/com/example/tests
 3. Запустите GET тесты в /todos

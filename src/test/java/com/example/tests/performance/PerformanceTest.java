@@ -1,27 +1,22 @@
 package com.example.tests.performance;
 
 import com.example.tests.helper.DataGenerator;
-import constants.Constants;
-import constants.RestAssuredSetup;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
+import java.util.*;
+import java.util.concurrent.*;
 
-import static constants.Constants.*;
+import static com.example.tests.helper.Constants.*;
+import static com.example.tests.helper.Specifications.*;
 import static io.restassured.RestAssured.given;
 
 public class PerformanceTest {
 
     @BeforeEach
     void setup() {
-        RestAssuredSetup.config();
+        installSpecifications(createSpec(BASE_URL), responseSpecOK200());
     }
 
     @Test
@@ -42,8 +37,6 @@ public class PerformanceTest {
                         long startTime = System.currentTimeMillis(); //
                         Response response =
                                 given()
-                                        .header("Authorization", Constants.AUTH_TOKEN)
-                                        .contentType("application/json")
                                         .body(requestBody)
                                         .when()
                                         .post("/todos");
