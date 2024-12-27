@@ -9,11 +9,11 @@ public class AuthTest {
     @Test
     void testWrongLogin() {
         given() // удаление данных с неверным логином
-                .auth().preemptive().basic("wrong_login", "admin")
+                .auth().preemptive().basic("invalid_login", "admin")
                 .when()
                 .delete("/todos/1")
                 .then()
-                .log().ifValidationFails()
+                .log().all()
                 .statusCode(401);
         System.out.println("Неверный логин");
     }
@@ -21,11 +21,11 @@ public class AuthTest {
     @Test
     void testWrongPassword() {
         given() //удаление данных с неверным паролем
-                .auth().preemptive().basic("admin", "wrong_password")
+                .auth().preemptive().basic("admin", "invalid_password")
                 .when()
                 .delete("/todos/1")
                 .then()
-                .log().ifValidationFails()
+                .log().all()
                 .statusCode(401);
         System.out.println("Неверный пароль");
     }

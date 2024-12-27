@@ -11,6 +11,7 @@ import java.util.concurrent.*;
 import static com.example.tests.helper.Constants.*;
 import static com.example.tests.helper.Specifications.*;
 import static io.restassured.RestAssured.given;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class PerformanceTest {
 
@@ -60,6 +61,6 @@ public class PerformanceTest {
 
         //ожидаю завершение задачи
         executorService.shutdown();
-        executorService.awaitTermination(1, TimeUnit.HOURS);
+        assertTrue(executorService.awaitTermination(1, TimeUnit.HOURS));
     }
 }

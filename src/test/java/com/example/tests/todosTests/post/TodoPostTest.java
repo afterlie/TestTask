@@ -31,8 +31,11 @@ public class TodoPostTest {
 
     @Test
     void postTodosWithRetryData() { //вставка валидных параметров и повторная вставка тех же
-        Todo todo = new Todo(12, "Sell something");
-        todo.setCompleted(dataGenerator.getRandomBool());
+        Todo todo = Todo.builder()
+                        .id(12)
+                        .text("Sell pie")
+                        .completed(dataGenerator.getRandomBool())
+                        .build();
         Response response = apiHelper.postToDo(todo.getId(), todo.getText(), todo.isCompleted());
                 response.then().spec(responseSpecOK200());
         Response response1 = apiHelper.postToDo(todo.getId(), todo.getText(), todo.isCompleted());
@@ -42,7 +45,7 @@ public class TodoPostTest {
     @Test
     void postTodosWithEmptyText() { //умение обрабатывать пустое поле
         Todo todo = new Todo();
-        todo.setId(1);
+        todo.setId(2);
         todo.setText("");
         todo.setCompleted(dataGenerator.getRandomBool());
         Response response = apiHelper.postToDo(todo.getId(), todo.getText(), todo.isCompleted());

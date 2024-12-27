@@ -31,6 +31,19 @@ public class TodoPutTests {
     }
 
     @Test
+    void putTodos2() { //проверка PUT запроса и его перезапись
+        Todo todo = new Todo();
+        todo.setId(2);
+        todo.setText("lyalya");
+        todo.setText("rrrrrrr");
+        todo.setCompleted(true);
+        todo.setCompleted(dataGenerator.getRandomBool());
+        Response response = apiHelper.putToDo(todo.getId(), todo.getText(), todo.isCompleted());
+        response.then().spec(responseSpecOK200());
+        System.out.println("PUT перезаписан по последним данным");
+    }
+
+    @Test
     void putTodosSeparately(){ //проверка put запроса на отсутствие данных
         Todo todo = new Todo();
         Response response = apiHelper.putToDo(todo.getId(), todo.getText(), todo.isCompleted());

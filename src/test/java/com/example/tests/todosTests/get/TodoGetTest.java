@@ -55,7 +55,7 @@ public class TodoGetTest {
     void testGetTodoThatDoesNotExist() {
         Response response = given() //проверка на несуществующий ID
                 .when()
-                .get("/todos/99");
+                .get("/todos/-5");
         response
                 .then()
                 .log().all()
