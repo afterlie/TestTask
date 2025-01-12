@@ -38,4 +38,8 @@ public class Specifications {
     public static void installSpecifications(RequestSpecification request){
         RestAssured.requestSpecification = request;
     }
+
+    public static void installSpecifications(ResponseSpecification response){
+        RestAssured.responseSpecification = response;
+    }
 }

@@ -2,23 +2,31 @@ package com.example.tests.todosTests.delete;
 
 import com.example.tests.helper.Constants;
 import com.example.tests.helper.Specifications;
+import com.example.tests.helper.listener.RetryListener;
 import io.restassured.response.Response;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import com.example.tests.helper.ApiHelper;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import static com.example.tests.helper.Constants.BASE_URL;
 import static com.example.tests.helper.Specifications.*;
 import static io.restassured.RestAssured.given;
 
 @Tag("delete")
+@ExtendWith(RetryListener.class)
 public class TodoDeleteTest {
 
     ApiHelper apiHelper = new ApiHelper();
     @BeforeEach
     void setup() {
         installSpecifications(Specifications.createSpec(BASE_URL));
+    }
+    @AfterAll
+    public static void saveFailed(){
+        RetryListener.saveFailedTests();
     }
 
     @Test
@@ -43,7 +51,8 @@ public class TodoDeleteTest {
 }
 
 //тесты без спецификаций
-
+@Tag("delete")
+@ExtendWith(RetryListener.class)
 class TodoDeleteTests {
     @Test
     void deleteTodosWithoutAuth() {

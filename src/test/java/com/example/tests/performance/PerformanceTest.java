@@ -1,8 +1,10 @@
 package com.example.tests.performance;
 
 import com.example.tests.helper.DataGenerator;
+import com.example.tests.helper.listener.RetryListener;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.util.*;
 import java.util.concurrent.*;
@@ -12,12 +14,18 @@ import static com.example.tests.helper.Specifications.*;
 import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@ExtendWith(RetryListener.class)
 @Tag("performance")
 public class PerformanceTest {
 
     @BeforeEach
     void setup() {
         installSpecifications(createSpec(BASE_URL), responseSpecOK200());
+    }
+
+    @AfterAll
+    public static void saveFailed(){
+        RetryListener.saveFailedTests();
     }
 
     @Test

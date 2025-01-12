@@ -1,12 +1,26 @@
 package com.example.tests.auth;
 
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import com.example.tests.helper.Specifications;
+import com.example.tests.helper.listener.RetryListener;
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.extension.ExtendWith;
 
+import static com.example.tests.helper.Specifications.*;
 import static io.restassured.RestAssured.given;
 
 @Tag("auth")
+@ExtendWith(RetryListener.class)
 public class AuthTest {
+
+    @BeforeEach
+    public void setup(){
+        Specifications.installSpecifications(responseSpec400());
+    }
+
+    @AfterAll
+    public static void saveFailed(){
+        RetryListener.saveFailedTests();
+    }
 
     @Test
     void testWrongLogin() {
@@ -16,7 +30,7 @@ public class AuthTest {
                 .delete("/todos/1")
                 .then()
                 .log().all()
-                .statusCode(401);
+                .spec(responseSpec400());
         System.out.println("Неверный логин");
     }
 
@@ -28,7 +42,7 @@ public class AuthTest {
                 .delete("/todos/1")
                 .then()
                 .log().all()
-                .statusCode(401);
+                .spec(responseSpec400());
         System.out.println("Неверный пароль");
     }
 }
