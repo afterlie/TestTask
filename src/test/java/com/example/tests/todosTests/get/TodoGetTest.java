@@ -3,6 +3,7 @@ package com.example.tests.todosTests.get;
 import com.example.tests.helper.ApiHelper;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static com.example.tests.helper.Constants.BASE_URL;
@@ -10,6 +11,7 @@ import static com.example.tests.helper.Specifications.*;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
 
+@Tag("get")
 public class TodoGetTest {
 
     ApiHelper apiHelper = new ApiHelper();

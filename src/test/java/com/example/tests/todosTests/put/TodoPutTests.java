@@ -6,11 +6,13 @@ import com.example.tests.todos.Todo;
 import com.example.tests.helper.Specifications;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static com.example.tests.helper.Constants.BASE_URL;
 import static com.example.tests.helper.Specifications.*;
 
+@Tag("put")
 public class TodoPutTests {
 
     ApiHelper apiHelper = new ApiHelper();

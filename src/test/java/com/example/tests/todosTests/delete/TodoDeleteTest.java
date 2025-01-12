@@ -4,6 +4,7 @@ import com.example.tests.helper.Constants;
 import com.example.tests.helper.Specifications;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import com.example.tests.helper.ApiHelper;
 
@@ -11,6 +12,7 @@ import static com.example.tests.helper.Constants.BASE_URL;
 import static com.example.tests.helper.Specifications.*;
 import static io.restassured.RestAssured.given;
 
+@Tag("delete")
 public class TodoDeleteTest {
 
     ApiHelper apiHelper = new ApiHelper();

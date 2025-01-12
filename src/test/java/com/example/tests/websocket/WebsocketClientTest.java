@@ -1,5 +1,6 @@
 package com.example.tests.websocket;
 
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import java.net.URI;
@@ -7,6 +8,7 @@ import java.net.URISyntaxException;
 
 public class WebsocketClientTest {
 
+    @Tag("websocket")
     @Test
     void tryToConnectToWebsocket() {
         try {

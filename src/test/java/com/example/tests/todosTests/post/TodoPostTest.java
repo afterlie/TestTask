@@ -5,11 +5,13 @@ import com.example.tests.helper.DataGenerator;
 import com.example.tests.todos.Todo;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static com.example.tests.helper.Constants.BASE_URL;
 import static com.example.tests.helper.Specifications.*;
 
+@Tag("post")
 public class TodoPostTest {
 
     DataGenerator dataGenerator = new DataGenerator();

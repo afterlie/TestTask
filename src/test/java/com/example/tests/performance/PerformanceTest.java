@@ -2,8 +2,7 @@ package com.example.tests.performance;
 
 import com.example.tests.helper.DataGenerator;
 import io.restassured.response.Response;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import java.util.*;
 import java.util.concurrent.*;
@@ -13,6 +12,7 @@ import static com.example.tests.helper.Specifications.*;
 import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@Tag("performance")
 public class PerformanceTest {
 
     @BeforeEach
