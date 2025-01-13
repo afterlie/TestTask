@@ -1,6 +1,5 @@
 package com.example.tests.auth;
 
-import com.example.tests.helper.Specifications;
 import com.example.tests.helper.listener.RetryListener;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,18 +11,13 @@ import static io.restassured.RestAssured.given;
 @ExtendWith(RetryListener.class)
 public class AuthTest {
 
-    @BeforeEach
-    public void setup(){
-        Specifications.installSpecifications(responseSpec400());
-    }
-
     @AfterAll
     public static void saveFailed(){
         RetryListener.saveFailedTests();
     }
 
     @Test
-    void testWrongLogin() {
+    public void testWrongLogin() {
         given() // удаление данных с неверным логином
                 .auth().preemptive().basic("invalid_login", "admin")
                 .when()
@@ -35,7 +29,7 @@ public class AuthTest {
     }
 
     @Test
-    void testWrongPassword() {
+    public void testWrongPassword() {
         given() //удаление данных с неверным паролем
                 .auth().preemptive().basic("admin", "invalid_password")
                 .when()

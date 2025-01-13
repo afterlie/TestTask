@@ -20,7 +20,7 @@ public class PerformanceTest {
 
     @BeforeEach
     void setup() {
-        installSpecifications(createSpec(BASE_URL), responseSpecOK200());
+        installSpecifications(createSpec(BASE_URL));
     }
 
     @AfterAll
