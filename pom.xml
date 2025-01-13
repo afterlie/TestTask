@@ -5,9 +5,6 @@
     <artifactId>todo-test</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
     <dependencies>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -43,6 +40,18 @@
             <artifactId>commons-io</artifactId>
             <version>2.18.0</version>
         </dependency>
+        <!-- Allure TestNG -->
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-testng</artifactId>
+            <version>2.21.0</version>
+        </dependency>
+        <!-- Allure JUnit -->
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-junit5</artifactId>
+            <version>2.21.0</version>
+        </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -69,6 +78,12 @@
             <artifactId>javax.json-api</artifactId>
             <version>1.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>7.10.2</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
     <profiles>
         <profile>
@@ -80,12 +95,7 @@
         <profile>
             <id>apiTests</id>
             <properties>
-                <groups>websocket</groups>
-                <groups>performance</groups>
-                <groups>get</groups>
-                <groups>put</groups>
-                <groups>post</groups>
-                <groups>delete</groups>
+                <groups>websocket,performance,get,put,post,delete</groups>
             </properties>
         </profile>
     </profiles>
@@ -94,6 +104,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.13.0</version>
                 <configuration>
                     <source>11</source>
                     <target>11</target>
@@ -105,8 +116,17 @@
                 <version>3.3.1</version>
                 <configuration>
                     <includes>
+                        <include>**/*Tests.java</include>
                         <include>**/*Test.java</include>
                     </includes>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-maven</artifactId>
+                <version>2.12.0</version>
+                <configuration>
+                    <reportVersion>2.30.0</reportVersion>
                 </configuration>
             </plugin>
         </plugins>

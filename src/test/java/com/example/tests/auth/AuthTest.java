@@ -1,6 +1,7 @@
 package com.example.tests.auth;
 
 import com.example.tests.helper.listener.RetryListener;
+import io.qameta.allure.Step;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 
@@ -16,8 +17,17 @@ public class AuthTest {
         RetryListener.saveFailedTests();
     }
 
+    @Step("{0}")
+    public void step(String message) {
+        // Здесь логика шага
+        System.out.println(message);
+    }
+
     @Test
     public void testWrongLogin() {
+        step("Открываем страницу авторизации");
+        step("Вводим неверный логин");
+        step("Проверяем сообщение о неверном логине");
         given() // удаление данных с неверным логином
                 .auth().preemptive().basic("invalid_login", "admin")
                 .when()
@@ -30,6 +40,9 @@ public class AuthTest {
 
     @Test
     public void testWrongPassword() {
+        step("Открываем страницу авторизации");
+        step("Вводим неверный пароль");
+        step("Проверяем сообщение о неверном пароле");
         given() //удаление данных с неверным паролем
                 .auth().preemptive().basic("admin", "invalid_password")
                 .when()

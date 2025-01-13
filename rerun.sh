@@ -7,3 +7,4 @@ if [ -f "$test_file" ]; then
     echo "test file is empty"
   fi
 fi
+rm -rf allure-results/*

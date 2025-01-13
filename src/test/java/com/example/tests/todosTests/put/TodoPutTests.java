@@ -43,8 +43,8 @@ public class TodoPutTests {
     @Test
     public void putTodos2() { //проверка PUT запроса и его перезапись
         Todo todo = new Todo();
-        todo.setId(2);
-        todo.setText("lyalya");
+        todo.setId(12);
+        todo.setText("lyalya1212");
         todo.setText("rrrrrrr");
         todo.setCompleted(true);
         todo.setCompleted(dataGenerator.getRandomBool());
