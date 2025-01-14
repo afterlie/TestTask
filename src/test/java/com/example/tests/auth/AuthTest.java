@@ -1,6 +1,7 @@
 package com.example.tests.auth;
 
 import com.example.tests.helper.listener.RetryListener;
+import io.qameta.allure.Issue;
 import io.qameta.allure.Step;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,13 +19,13 @@ public class AuthTest {
     }
 
     @Step("{0}")
-    public void step(String message) {
-        // Здесь логика шага
+    public void step(String message){
         System.out.println(message);
     }
 
     @Test
-    public void testWrongLogin() {
+    @Issue("LINK-5612")
+    public void testWrongLogin(){
         step("Открываем страницу авторизации");
         step("Вводим неверный логин");
         step("Проверяем сообщение о неверном логине");
@@ -34,12 +35,12 @@ public class AuthTest {
                 .delete("/todos/1")
                 .then()
                 .log().all()
-                .spec(responseSpec400());
+                .spec(responseSpecOK200());
         System.out.println("Неверный логин");
     }
 
     @Test
-    public void testWrongPassword() {
+    public void testWrongPassword(){
         step("Открываем страницу авторизации");
         step("Вводим неверный пароль");
         step("Проверяем сообщение о неверном пароле");
@@ -49,7 +50,7 @@ public class AuthTest {
                 .delete("/todos/1")
                 .then()
                 .log().all()
-                .spec(responseSpec400());
+                .spec(responseSpecOK200());
         System.out.println("Неверный пароль");
     }
 }

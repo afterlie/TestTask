@@ -17,6 +17,23 @@
             <artifactId>rest-assured</artifactId>
             <version>5.3.0</version>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-api</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>7.10.2</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-api</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.java-websocket</groupId>
@@ -40,13 +57,6 @@
             <artifactId>commons-io</artifactId>
             <version>2.18.0</version>
         </dependency>
-        <!-- Allure TestNG -->
-        <dependency>
-            <groupId>io.qameta.allure</groupId>
-            <artifactId>allure-testng</artifactId>
-            <version>2.21.0</version>
-        </dependency>
-        <!-- Allure JUnit -->
         <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-junit5</artifactId>
@@ -84,6 +94,12 @@
             <version>7.10.2</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.2.10</version> <!-- или актуальную версию -->
+        </dependency>
+
     </dependencies>
     <profiles>
         <profile>
@@ -95,7 +111,19 @@
         <profile>
             <id>apiTests</id>
             <properties>
-                <groups>websocket,performance,get,put,post,delete</groups>
+                <groups>get,put,post,delete</groups>
+            </properties>
+        </profile>
+        <profile>
+            <id>performanceTest</id>
+            <properties>
+                <groups>performance</groups>
+            </properties>
+        </profile>
+        <profile>
+            <id>websocketTest</id>
+            <properties>
+                <groups>websocket</groups>
             </properties>
         </profile>
     </profiles>
@@ -119,12 +147,36 @@
                         <include>**/*Tests.java</include>
                         <include>**/*Test.java</include>
                     </includes>
+                    <systemPropertyVariables>
+                        <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
+                    </systemPropertyVariables>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.0.0</version>
+                <executions>
+                    <execution>
+                        <id>delete-allure-results</id>
+                        <phase>clean</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <executable>rm</executable>
+                            <arguments>
+                                <argument>-rf</argument>
+                                <argument>${project.build.directory}/allure-results</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>io.qameta.allure</groupId>
                 <artifactId>allure-maven</artifactId>
-                <version>2.12.0</version>
+                <version>2.13.0</version>
                 <configuration>
                     <reportVersion>2.30.0</reportVersion>
                 </configuration>

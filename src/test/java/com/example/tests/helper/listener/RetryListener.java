@@ -39,7 +39,7 @@ public class RetryListener implements TestExecutionExceptionHandler, AfterTestEx
     @SneakyThrows
     public static void saveFailedTests(){
         String output = "src/test/resources/FailedTests.txt";
-        String result = String.join("; ", failedTestsNames);
+        String result = String.join(", ", failedTestsNames);
         FileUtils.writeStringToFile(new File(output), result);
     }
 }

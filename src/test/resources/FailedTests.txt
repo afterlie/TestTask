@@ -1,0 +1,1 @@
+com.example.tests.auth.AuthTest#testWrongPassword, com.example.tests.auth.AuthTest#testWrongLogin
